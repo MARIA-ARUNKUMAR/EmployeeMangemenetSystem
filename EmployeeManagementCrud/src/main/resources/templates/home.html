@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com">
+<head>
+<meta charset="ISO-8859-1">
+<title>EMPLOYEE MANAGEMENT SYSTEM</title>
+<!-- Latest compiled and minified CSS -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+	crossorigin="anonymous">
+	<link rel="stylesheet" 
+   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+       crossorigin="anonymous" referrerpolicy="no-referrer" />
+	
+<style type="text/css">
+table {
+	text-align: center;
+}
+#addemp:hover
+{
+background: blue;
+}
+a:hover  {
+	margin: 10px;
+	background: #E5FC14;
+background: linear-gradient(to top right, #E5FC14 0%, #F70AEF 91%);
+	
+}
+
+#divnav {
+	display: flex;
+	justify-content: space-between;
+}
+
+#home {
+	float: left;
+	margin-right: 900px;
+}
+
+nav {
+	height: 20px;
+}
+</style>
+</head>
+<body style="background: #FF1CE1;
+background: linear-gradient(to top left, #FF1CE1 36%, #00FFFF 100%);
+">
+
+	<!-- NAV BAR -->
+	<nav class="navbar navbar-expand-lg  bg-info text-white">
+		<div class="container-fluid" id="divnav">
+			<a id="home" class="navbar-brand" href="home"><i
+				class="fa-solid fa-house fa-bounce" style="color: #f4eb01;"></i>Home</a>
+			<a class="navbar-brand" href="home"><i class="fa-solid fa-pen fa-shake" style="color: #ff2600;"></i>Update</a> <a
+				class="navbar-brand" href="aboutus"><i
+				class="fa-solid fa-circle-info fa-shake" style="color: #eb04fb;"></i>About
+				Us</a>
+		</div>
+	</nav>
+	<!-- NAV BAR -->
+	<h1 style="text-align: center; color: darkmagenta";>EMPLOYEE
+		MANAGEMENT SYSTEM</h1>
+	<div th:if=${session.alertt}>
+		<div class="alert alert-success" role="alert"
+			th:text="${session.alertt}">
+			<th:block th:text="${#session.removeAttribute('alertt')}"></th:block>
+		</div>
+	</div>
+	<br></br>
+	<br></br>
+
+
+	<div class="container my-2">
+		<a id="addemp" th:href="@{/showNewEmployeeForm}"
+			class="btn btn-primary btn-lg mb-3">Add Employee</a>
+		<h1>Employee's List</h1>
+		<table
+			class="table table-info table-hover table-bordered border-success border-2 rounded-3 ">
+			<thead class="table table-danger ">
+				<tr>
+					<th style="text-align: center;">Employee First Name</th>
+					<th style="text-align: center;">Employee Last Name</th>
+					<th style="text-align: center;">Employee Email</th>
+					<th style="text-align: center;">Actions</th>
+				</tr>
+			</thead>
+			<br></br>
+			<tbody class="table  table-dark  ">
+				<tr th:each="employee:${listEmployees}">
+					<td th:text=${employee.firstName}></td>
+					<td th:text="${employee.lastName}"></td>
+					<td th:text="${employee.email}"></td>
+					<td><a th:href="@{/showFormForUpdate/{id}(id=${employee.id})}"
+						class="btn btn-success">Update</a> <a
+						th:href="@{/deleteEmployee/{id}(id=${employee.id})}"
+						class="btn btn-danger">Delete</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<!-- CDN LINKS -->
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet"
+		href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+		crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet"
+		href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css"
+		integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+		crossorigin="anonymous">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
+		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+		crossorigin="anonymous"></script>
+	<!-- CDN LINKS -->
+</body>
+</html>
